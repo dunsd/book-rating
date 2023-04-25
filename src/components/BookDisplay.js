@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "react-bootstrap";
 
 const BookDisplay = ({ storedBooks }) => {
   return (
@@ -9,6 +10,7 @@ const BookDisplay = ({ storedBooks }) => {
             <div>Title: {input.title}</div>
             <div>Title: {input.author}</div>
             <div>Title: {input.pages}</div>
+            <Button className="deleteBtn" variant="secondary" > Delete</Button>
           </div>
         );
       })}

@@ -1,0 +1,28 @@
+$primary-colour: #996633;
+
+.addBookForm {
+  .form-label {
+    font-weight: 600;
+  }
+}
+
+.modal-content {
+  box-shadow: rgb(0, 0, 0) 10px 10px 10px 5px;
+  background-color: $primary-colour;
+}
+
+.addBookForm {
+  h2 {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.library {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 60%;
+  margin: 0 auto;
+  gap: 1em;
+}
