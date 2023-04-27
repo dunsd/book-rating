@@ -1,9 +1,23 @@
 import React from "react";
 import { Form, Button, Modal } from "react-bootstrap";
+import { v4 as uuidv4 } from 'uuid';
 
 const AddBook = ({ bookDetails, handleChange, handleSubmit, formIsVisible, closeForm, storedBooks }) => {
   
   const { title, author, pages } = bookDetails
+  const formSubmit = (event) => {
+    event.preventDefault();
+    const newBook = {
+      id: uuidv4(),
+      title,
+      author,
+      pages
+    }
+    console.log(newBook)
+    handleSubmit(newBook);
+    closeForm();
+  }
+
   return (
     <Modal show={formIsVisible} onHide={closeForm}>
         <Form className="addBookForm p-3 m-1">
@@ -52,7 +66,7 @@ const AddBook = ({ bookDetails, handleChange, handleSubmit, formIsVisible, close
                         <Button
                           type="submit"
                           variant="secondary"
-                          onClick={(event) => handleSubmit( event)}
+                          onClick={(event) => formSubmit( event)}
                         >
                           Submit
                         </Button>

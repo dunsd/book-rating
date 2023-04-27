@@ -6,47 +6,43 @@ import { Button } from "react-bootstrap";
 import "../css/Library.scss";
 
 const Library = () => {
-  const [bookDetails, setBookDetails] = useState([
-    {
-      title: "",
-      author: "",
-      pages: "",
-    },
-  ]);
+  const [bookDetails, setBookDetails] = useState({
+    title: "",
+    author: "",
+    pages: "",
+  });
 
   const [storedBooks, setStoredBooks] = useState([
-    {
-      title: "",
-      author: "",
-      pages: "",
-    },
+    
   ]);
 
   const [formIsVisible, setFormIsVisible] = useState(false);
 
-
   const openForm = (e) => {
     setFormIsVisible(true);
-  }
+  };
 
   const closeForm = (e) => {
     setFormIsVisible(false);
-  }
-
-  const handleChange = ( event) => {
-    let data = [...bookDetails];
-    data[event.target.name] = event.target.value;
-    setBookDetails(data);
   };
 
-  const handleSubmit = ( event) => {
-    event.preventDefault();
-    setStoredBooks([bookDetails, ...storedBooks]);
-  }; 
+  const handleChange = (event) => {
+    setBookDetails((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const handleSubmit = (book) => {
+    setStoredBooks([book, ...storedBooks]);
+    console.log(book);
+  };
 
   return (
     <div className="library">
-        <Button variant="secondary" onClick={openForm} >Add</Button>
+      <Button variant="secondary" onClick={openForm}>
+        Add
+      </Button>
       <AddBook
         bookDetails={bookDetails}
         handleChange={handleChange}
