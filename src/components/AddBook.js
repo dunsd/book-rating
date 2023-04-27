@@ -1,7 +1,9 @@
 import React from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 
-const AddBook = ({ bookDetails, handleChange, handleSubmit, formIsVisible, closeForm }) => {
+const AddBook = ({ bookDetails, handleChange, handleSubmit, formIsVisible, closeForm, storedBooks }) => {
+  
+  const { title, author, pages } = bookDetails
   return (
     <Modal show={formIsVisible} onHide={closeForm}>
         <Form className="addBookForm p-3 m-1">
@@ -10,9 +12,9 @@ const AddBook = ({ bookDetails, handleChange, handleSubmit, formIsVisible, close
         </Modal.Header>
         <Modal.Body>
             
-              {bookDetails.map((input, index) => {
+              {/* {storedBooks.map((input, index) => {
                 return (
-                  <div key={index}>
+                  <div key={index}> */}
                     <Form.Group className="formInput m-1" controlId="title">
                       <Form.Label>Book Title: </Form.Label>
                       <Form.Control
@@ -20,8 +22,8 @@ const AddBook = ({ bookDetails, handleChange, handleSubmit, formIsVisible, close
                         placeholder="Book Title"
                         className="inputControl"
                         name="title"
-                        value={input.title}
-                        onChange={(event) => handleChange(index, event)}
+                        value={title}
+                        onChange={(event) => handleChange( event)}
                       />
                     </Form.Group>
                     <Form.Group className="formInput m-1" controlId="author">
@@ -31,8 +33,8 @@ const AddBook = ({ bookDetails, handleChange, handleSubmit, formIsVisible, close
                         placeholder="Book Author"
                         className="inputControl"
                         name="author"
-                        value={input.author}
-                        onChange={(event) => handleChange(index, event)}
+                        value={author}
+                        onChange={(event) => handleChange( event)}
                       />
                     </Form.Group>
                     <Form.Group className="formInput m-1" controlId="pages">
@@ -42,15 +44,15 @@ const AddBook = ({ bookDetails, handleChange, handleSubmit, formIsVisible, close
                         placeholder="Page Count"
                         className="inputControl"
                         name="pages"
-                        value={input.pages}
-                        onChange={(event) => handleChange(index, event)}
+                        value={pages}
+                        onChange={(event) => handleChange(event)}
                       />
                     </Form.Group>
                     <Modal.Footer>
                         <Button
                           type="submit"
                           variant="secondary"
-                          onClick={(event) => handleSubmit(index, event)}
+                          onClick={(event) => handleSubmit( event)}
                         >
                           Submit
                         </Button>
@@ -61,9 +63,9 @@ const AddBook = ({ bookDetails, handleChange, handleSubmit, formIsVisible, close
                                 Close Form
                         </Button>
                     </Modal.Footer>
-                  </div>
+                  {/* </div>
                 );
-              })}
+              })} */}
               </Modal.Body>
             </Form>
         

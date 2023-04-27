@@ -33,18 +33,15 @@ const Library = () => {
     setFormIsVisible(false);
   }
 
-  const handleChange = (index, event) => {
+  const handleChange = ( event) => {
     let data = [...bookDetails];
-    data[index][event.target.name] = event.target.value;
+    data[event.target.name] = event.target.value;
     setBookDetails(data);
   };
 
-  const handleSubmit = (index, event) => {
+  const handleSubmit = ( event) => {
     event.preventDefault();
-    let data = [...storedBooks];
-    data.push(bookDetails[index]);
-    console.log(data);
-    setStoredBooks(data);
+    setStoredBooks([bookDetails, ...storedBooks]);
   }; 
 
   return (
@@ -56,6 +53,7 @@ const Library = () => {
         handleSubmit={handleSubmit}
         closeForm={closeForm}
         formIsVisible={formIsVisible}
+        storedBooks={storedBooks}
       />
       <BookDisplay storedBooks={storedBooks} />
     </div>
