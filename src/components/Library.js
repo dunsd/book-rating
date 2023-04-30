@@ -50,6 +50,7 @@ const Library = () => {
         closeForm={closeForm}
         formIsVisible={formIsVisible}
         storedBooks={storedBooks}
+        setBookDetails={setBookDetails}
       />
       <BookDisplay storedBooks={storedBooks} />
     </div>
