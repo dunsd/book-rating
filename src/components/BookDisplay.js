@@ -2,14 +2,29 @@ import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 
 
-const BookDisplay = () => {
-  async function deleteBook(id) {
-    // await fetch(`http://localhost:5000/${id}`, {
-    //   method: "DELETE",
-    // });
-    console.log(storedBooks);
+const BookDisplay = ({ storedBooks, setStoredBooks, toggleUpdate, togDisplay }) => {
+
+  async function deleteRecord(id) {
+
+    try {
+    const res = await fetch(`http://localhost:5000/${id}/`, {
+      method: "DELETE",
+      headers: {"Content-Type":"application/json"}
+    });
+
   }
-const [storedBooks, setStoredBooks] = useState([]);
+  catch(error) {
+    console.error("Error with delete", error);
+  }
+
+    
+    const newRecords = storedBooks.filter((el) => el._id !== id);
+
+    setStoredBooks(newRecords);
+    
+  }
+
+
   useEffect(() => {
     async function getRecords() {
       const response = await fetch(`http://localhost:5000/record/`);
@@ -20,8 +35,8 @@ const [storedBooks, setStoredBooks] = useState([]);
         return;
       }
 
-      const records = await response.json();
-      setStoredBooks(records);
+      const storedBooks = await response.json();
+      setStoredBooks(storedBooks);
     }
 
     getRecords();
@@ -33,17 +48,17 @@ const [storedBooks, setStoredBooks] = useState([]);
     <div>
       {storedBooks.length > 0 && (
         <div>
-          {storedBooks.map((input, index) => {
+          {storedBooks.map((input) => {
             return (
-              <div key={input.id}>
+              <div key={input._id}>
                 <div>Title: {input.title}</div>
                 <div>Author: {input.author}</div>
                 <div>Pages: {input.pages}</div>
-                <div>{input.id}</div>
+                <div>id: {input._id}</div>
                 <Button
                   className="deleteBtn"
                   variant="secondary"
-                  onClick={() => deleteBook(input.id)}
+                  onClick={() => deleteRecord(input._id)}
                 >
                   {" "}
                   Delete

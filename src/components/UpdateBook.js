@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 
-const AddBook = ({
+const UpdateBook = ({
   bookDetails,
   handleChange,
   handleSubmit,
@@ -12,7 +12,7 @@ const AddBook = ({
   setStoredBooks,
   setBookDetails
 }) => {
-  async function addBookDb(book) {
+  async function UpdateBookDb(book) {
     await fetch("http://localhost:5000/record/add", {
       method: "POST",
       headers: {
@@ -36,7 +36,7 @@ const AddBook = ({
     };
     console.log(newBook);
     handleSubmit(newBook);
-    addBookDb(newBook);
+    UpdateBookDb(newBook);
     closeForm();
     setBookDetails({
       title: "",
@@ -48,7 +48,7 @@ const AddBook = ({
 
   return (
     <Modal show={formIsVisible} onHide={closeForm}>
-      <Form className="addBookForm p-3 m-1">
+      <Form className="UpdateBookForm p-3 m-1">
         <Modal.Header closeButton>
           <Modal.Title>Add a Book</Modal.Title>
         </Modal.Header>
@@ -104,4 +104,4 @@ const AddBook = ({
   );
 };
 
-export default AddBook;
+export default UpdateBook;

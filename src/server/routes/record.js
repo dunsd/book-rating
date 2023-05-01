@@ -46,13 +46,34 @@ recordRoutes.route("/record/add").post(function (req, response) {
    author: req.body.author,
    pages: req.body.pages,
  };
- console.log(myobj);
- db_connect.collection("records").insertOne(myobj, function (err, res) {
-   if (err) throw err;
-   response.json(res);
- });
+db_connect.collection("records").insertOne(myobj)
+.then(result => {
+  response.status(200).json({
+    message: "added",
+    result
+  })
+})
+.catch(err => {
+  console.log(err);
+  response.status(500).json({
+    message: "Error when adding",
+    error: err
+  })
+})
 });
- 
+
+//  db_connect.collection("records").insertOne(myobj, function (err, res) {
+//    if (err) throw err;
+//    response.json({msg: "added"});
+//    response.sendStatus(200);
+//  });
+// });
+
+// recordRoutes.delete("/record/delete/:id", async(req, res) => {
+//   await 
+// })
+
+
 // This section will help you update a record by id.
 recordRoutes.route("/update/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
@@ -66,22 +87,42 @@ recordRoutes.route("/update/:id").post(function (req, response) {
  };
  db_connect
    .collection("records")
-   .updateOne(myquery, newvalues, function (err, res) {
-     if (err) throw err;
-     console.log("1 document updated");
-     response.json(res);
-   });
-});
+   .updateOne(myquery, newvalues)
+   .then(result => {
+    response.status(200).json({
+      message: "Edited",
+      result
+    });
+   })
+   .catch(err => {
+    console.log(err);
+    response.status(500).json({
+      message: "Error occured",
+      error: err
+    })
+   })
+   
+     });
  
 // This section will help you delete a record
 recordRoutes.route("/:id").delete((req, response) => {
- let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
- db_connect.collection("records").deleteOne(myquery, function (err, obj) {
-   if (err) throw err;
-   console.log("1 document deleted");
-   response.json(obj);
+  let db_connect = dbo.getDb();
+  let myquery = { _id: new ObjectId(req.params.id) };
+  db_connect.collection("records").deleteOne(myquery)
+  .then(result => {
+    response.status(200).json({
+      message: "deleted",
+      result
+    });
+  })  
+  .catch(err => {
+    console.log(err);
+    response.status(500).json({
+      message: 'Error Occured',
+      error: err
+  })
  });
-});
+})
+
  
 module.exports = recordRoutes;

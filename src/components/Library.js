@@ -12,6 +12,13 @@ const Library = () => {
     pages: "",
   });
 
+  const [togDisplay, setTogDisplay] = useState("true");
+
+  const toggleUpdate = () => {
+    if(togDisplay) setTogDisplay("false");
+    else setTogDisplay("true");
+  }
+
   const [storedBooks, setStoredBooks] = useState([
     
   ]);
@@ -34,7 +41,7 @@ const Library = () => {
   };
 
   const handleSubmit = (book) => {
-    setStoredBooks([book, ...storedBooks]);
+    setStoredBooks({book, ...storedBooks});
     console.log(book);
   };
 
@@ -51,8 +58,14 @@ const Library = () => {
         formIsVisible={formIsVisible}
         storedBooks={storedBooks}
         setBookDetails={setBookDetails}
+        setStoredBooks={setStoredBooks}
       />
-      <BookDisplay storedBooks={storedBooks} />
+      <BookDisplay storedBooks={storedBooks}
+      setStoredBooks={setStoredBooks}
+      formIsVisible={formIsVisible}
+      toggleUpdate={toggleUpdate}
+      togDisplay={togDisplay}
+      />
     </div>
   );
 };
