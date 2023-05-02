@@ -62,27 +62,16 @@ db_connect.collection("records").insertOne(myobj)
 })
 });
 
-//  db_connect.collection("records").insertOne(myobj, function (err, res) {
-//    if (err) throw err;
-//    response.json({msg: "added"});
-//    response.sendStatus(200);
-//  });
-// });
-
-// recordRoutes.delete("/record/delete/:id", async(req, res) => {
-//   await 
-// })
-
 
 // This section will help you update a record by id.
 recordRoutes.route("/update/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
+ let myquery = { _id: new ObjectId(req.params.id) };
  let newvalues = {
    $set: {
-     name: req.body.name,
-     position: req.body.position,
-     level: req.body.level,
+     title: req.body.title,
+     author: req.body.author,
+     pages: req.body.pages,
    },
  };
  db_connect

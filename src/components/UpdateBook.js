@@ -3,17 +3,16 @@ import { Form, Button, Modal } from "react-bootstrap";
 import { v4 as uuidv4 } from "uuid";
 
 const UpdateBook = ({
-  bookDetails,
-  handleChange,
-  handleSubmit,
-  formIsVisible,
-  closeForm,
+  handleChangeUpdate,
+  bookToUpdate,
   storedBooks,
   setStoredBooks,
-  setBookDetails
+  upFormIsVisible,
+  togUpForm,
+  getRecords,
 }) => {
-  async function UpdateBookDb(book) {
-    await fetch("http://localhost:5000/record/add", {
+  async function updateBookDb(id, book) {
+    await fetch(`http://localhost:5000/update/${id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,33 +23,23 @@ const UpdateBook = ({
       return;
     });
   }
-
-  const { title, author, pages } = bookDetails;
-  const formSubmit = (event) => {
+  const { title, author, pages } = bookToUpdate;
+  const handleUpdateSubmit = (event) => {
     event.preventDefault();
-    const newBook = {
-      id: uuidv4(),
+    const updatedBook = {
       title,
       author,
       pages,
     };
-    console.log(newBook);
-    handleSubmit(newBook);
-    UpdateBookDb(newBook);
-    closeForm();
-    setBookDetails({
-      title: "",
-      author: "",
-      pages: "",
-    })
-    
+    updateBookDb(bookToUpdate._id, updatedBook);
+    togUpForm();
   };
 
   return (
-    <Modal show={formIsVisible} onHide={closeForm}>
+    <Modal show={upFormIsVisible} onHide={togUpForm}>
       <Form className="UpdateBookForm p-3 m-1">
         <Modal.Header closeButton>
-          <Modal.Title>Add a Book</Modal.Title>
+          <Modal.Title>Update a Book</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="formInput m-1" controlId="title">
@@ -61,7 +50,7 @@ const UpdateBook = ({
               className="inputControl"
               name="title"
               value={title}
-              onChange={(event) => handleChange(event)}
+              onChange={(event) => handleChangeUpdate(event)}
             />
           </Form.Group>
           <Form.Group className="formInput m-1" controlId="author">
@@ -72,7 +61,7 @@ const UpdateBook = ({
               className="inputControl"
               name="author"
               value={author}
-              onChange={(event) => handleChange(event)}
+              onChange={(event) => handleChangeUpdate(event)}
             />
           </Form.Group>
           <Form.Group className="formInput m-1" controlId="pages">
@@ -83,18 +72,18 @@ const UpdateBook = ({
               className="inputControl"
               name="pages"
               value={pages}
-              onChange={(event) => handleChange(event)}
+              onChange={(event) => handleChangeUpdate(event)}
             />
           </Form.Group>
           <Modal.Footer>
             <Button
               type="submit"
               variant="secondary"
-              onClick={(event) => formSubmit(event)}
+              onClick={(event) => handleUpdateSubmit(event)}
             >
               Submit
             </Button>
-            <Button variant="secondary" onClick={closeForm}>
+            <Button variant="secondary" onClick={togUpForm}>
               Close Form
             </Button>
           </Modal.Footer>

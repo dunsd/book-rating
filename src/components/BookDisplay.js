@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button } from "react-bootstrap";
 
-
-const BookDisplay = ({ storedBooks, setStoredBooks, toggleUpdate, togDisplay }) => {
-
+const BookDisplay = ({
+  upFormIsVisible,
+  storedBooks,
+  setStoredBooks,
+  toggleUpdate,
+  togDisplay,
+  editBook,
+}) => {
   async function deleteRecord(id) {
-
     try {
-    const res = await fetch(`http://localhost:5000/${id}/`, {
-      method: "DELETE",
-      headers: {"Content-Type":"application/json"}
-    });
+      await fetch(`http://localhost:5000/${id}/`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (error) {
+      console.error("Error with delete", error);
+    }
 
-  }
-  catch(error) {
-    console.error("Error with delete", error);
-  }
-
-    
     const newRecords = storedBooks.filter((el) => el._id !== id);
 
     setStoredBooks(newRecords);
-    
   }
-
 
   useEffect(() => {
     async function getRecords() {
@@ -42,7 +41,7 @@ const BookDisplay = ({ storedBooks, setStoredBooks, toggleUpdate, togDisplay }) 
     getRecords();
 
     return;
-  }, [storedBooks.length]);
+  }, [storedBooks.length, upFormIsVisible]);
 
   return (
     <div>
@@ -63,7 +62,11 @@ const BookDisplay = ({ storedBooks, setStoredBooks, toggleUpdate, togDisplay }) 
                   {" "}
                   Delete
                 </Button>
-                <Button className="editBtn" variant="secondary">
+                <Button
+                  className="editBtn"
+                  variant="secondary"
+                  onClick={() => editBook(input)}
+                >
                   {" "}
                   Edit
                 </Button>
