@@ -6,7 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  - Add a book using the add book form and this will store it in the database.
  - Delete a book from the list.
  - Update an entry using the edit book form.
-
+ 
+ ![Home Page](https://github.com/dunsd/book-rating/blob/main/src/images/home-page.png)
+ ![Add Book Form](https://github.com/dunsd/book-rating/blob/main/src/images/add-book.png)
+ ![Update Book Form](https://github.com/dunsd/book-rating/blob/main/src/images/update-book.png)
 ## Available Scripts
 
 In the project directory, you can run:
