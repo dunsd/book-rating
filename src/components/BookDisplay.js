@@ -53,7 +53,6 @@ const BookDisplay = ({
                 <div>Title: {input.title}</div>
                 <div>Author: {input.author}</div>
                 <div>Pages: {input.pages}</div>
-                <div>id: {input._id}</div>
                 <Button
                   className="deleteBtn"
                   variant="secondary"
