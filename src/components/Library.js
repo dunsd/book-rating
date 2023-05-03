@@ -80,8 +80,8 @@ const Library = () => {
 
   return (
     <div className="library">
-      <Button variant="secondary" onClick={openForm}>
-        Add
+      <Button variant="secondary" className="addBtn" onClick={openForm}>
+        Add a Book
       </Button>
       <AddBook
         bookDetails={bookDetails}

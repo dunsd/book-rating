@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
 const BookDisplay = ({
   upFormIsVisible,
@@ -48,25 +48,29 @@ const BookDisplay = ({
         <div>
           {storedBooks.map((input) => {
             return (
-              <div key={input._id}>
-                <div>Title: {input.title}</div>
-                <div>Author: {input.author}</div>
-                <div>Pages: {input.pages}</div>
-                <Button
-                  className="deleteBtn"
-                  variant="secondary"
-                  onClick={() => deleteRecord(input._id)}
-                >
-                  Delete
-                </Button>
-                <Button
-                  className="editBtn"
-                  variant="secondary"
-                  onClick={() => editBook(input)}
-                >
-                  Edit
-                </Button>
-              </div>
+              <Card key={input._id}>
+                <Card.Body>
+                  <div>Title: {input.title}</div>
+                  <div>Author: {input.author}</div>
+                  <div>Pages: {input.pages}</div>
+                </Card.Body>
+                <div class="cardBtns">
+                  <Button
+                    className="deleteBtn"
+                    variant="secondary"
+                    onClick={() => deleteRecord(input._id)}
+                  >
+                    Delete
+                  </Button>
+                  <Button
+                    className="editBtn"
+                    variant="secondary"
+                    onClick={() => editBook(input)}
+                  >
+                    Edit
+                  </Button>
+                </div>
+              </Card>
             );
           })}
         </div>

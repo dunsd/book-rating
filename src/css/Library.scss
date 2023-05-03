@@ -26,3 +26,20 @@ $primary-colour: #996633;
   margin: 0 auto;
   gap: 1em;
 }
+
+.cardBtns {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2em;
+  padding: 1em;
+}
+
+.card {
+  margin: 2em;
+}
+
+.addBtn {
+  max-width: 10em;
+  margin: auto;
+}
+
