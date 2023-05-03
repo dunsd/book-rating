@@ -5,8 +5,6 @@ const BookDisplay = ({
   upFormIsVisible,
   storedBooks,
   setStoredBooks,
-  toggleUpdate,
-  togDisplay,
   editBook,
 }) => {
   async function deleteRecord(id) {
@@ -41,6 +39,7 @@ const BookDisplay = ({
     getRecords();
 
     return;
+    // eslint-disable-next-line
   }, [storedBooks.length, upFormIsVisible]);
 
   return (
@@ -58,7 +57,6 @@ const BookDisplay = ({
                   variant="secondary"
                   onClick={() => deleteRecord(input._id)}
                 >
-                  {" "}
                   Delete
                 </Button>
                 <Button
@@ -66,7 +64,6 @@ const BookDisplay = ({
                   variant="secondary"
                   onClick={() => editBook(input)}
                 >
-                  {" "}
                   Edit
                 </Button>
               </div>

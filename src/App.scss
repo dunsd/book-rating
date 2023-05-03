@@ -1,3 +1,5 @@
+$primary-colour: #996633;
+
 body {
   min-height: 100vh;
 }
@@ -6,6 +8,7 @@ body {
   display: flex;
   height: 100vh;
   justify-content: center;
+  flex-direction: column;
 }
 
 .mainContent {
