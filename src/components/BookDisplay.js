@@ -55,7 +55,7 @@ const BookDisplay = ({
                   <div>Pages: {input.pages}</div>
                   <div>Review: {input.review}</div>
                 </Card.Body>
-                <div class="cardBtns">
+                <div className="cardBtns">
                   <Button
                     className="deleteBtn"
                     variant="secondary"
