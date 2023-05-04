@@ -53,6 +53,7 @@ const BookDisplay = ({
                   <div>Title: {input.title}</div>
                   <div>Author: {input.author}</div>
                   <div>Pages: {input.pages}</div>
+                  <div>Review: {input.review}</div>
                 </Card.Body>
                 <div class="cardBtns">
                   <Button

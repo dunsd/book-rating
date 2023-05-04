@@ -45,6 +45,7 @@ recordRoutes.route("/record/add").post(function (req, response) {
    title: req.body.title,
    author: req.body.author,
    pages: req.body.pages,
+   review: req.body.review,
  };
 db_connect.collection("records").insertOne(myobj)
 .then(result => {
@@ -72,6 +73,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
      title: req.body.title,
      author: req.body.author,
      pages: req.body.pages,
+     review: req.body.review,
    },
  };
  db_connect

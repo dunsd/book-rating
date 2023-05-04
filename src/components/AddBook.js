@@ -25,7 +25,7 @@ const AddBook = ({
     });
   }
 
-  const { title, author, pages } = bookDetails;
+  const { title, author, pages, review } = bookDetails;
   const formSubmit = (event) => {
     event.preventDefault();
     const newBook = {
@@ -33,6 +33,7 @@ const AddBook = ({
       title,
       author,
       pages,
+      review
     };
     console.log(newBook);
     handleSubmit(newBook);
@@ -42,6 +43,7 @@ const AddBook = ({
       title: "",
       author: "",
       pages: "",
+      review: "",
     })
     
   };
@@ -83,6 +85,18 @@ const AddBook = ({
               className="inputControl"
               name="pages"
               value={pages}
+              onChange={(event) => handleChange(event)}
+            />
+          </Form.Group>
+          <Form.Group className="formInput m-1" controlId="pages">
+            <Form.Label>Review: </Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Review"
+              className="inputControl"
+              name="review"
+              value={review}
               onChange={(event) => handleChange(event)}
             />
           </Form.Group>

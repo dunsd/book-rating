@@ -11,12 +11,14 @@ const Library = () => {
     title: "",
     author: "",
     pages: "",
+    review: "",
   });
 
   const [bookToUpdate, setBookToUpdate] = useState({
     title: "",
     author: "",
     pages: "",
+    review: "",
   })
 
 
