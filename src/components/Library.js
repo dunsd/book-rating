@@ -6,7 +6,7 @@ import UpdateBook from "./UpdateBook";
 import { Button } from "react-bootstrap";
 import "../css/Library.scss";
 
-const Library = () => {
+const Library = ({currentUser}) => {
   const [bookDetails, setBookDetails] = useState({
     title: "",
     author: "",
@@ -109,6 +109,7 @@ const Library = () => {
       editBook={editBook}
       getRecords={getRecords}
       upFormIsVisible={upFormIsVisible}
+      currentUser={currentUser}
       />
     </div>
   );

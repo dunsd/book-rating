@@ -13,7 +13,8 @@ const RouteSwitch = () => {
     const [currentUser, setCurrentUser] = useState("");
 
     const changeUser = (userName) => {
-        setCurrentUser(userName)
+        setCurrentUser(userName);
+        console.log(currentUser);
     }
 
     return (
@@ -23,9 +24,11 @@ const RouteSwitch = () => {
                 <div className="main-content">
                     <Routes>
                         <Route element={<Home />} path="/" exact={true} />
-                        <Route element={<Library />} path="/library" exact={true} />
+                        <Route element={<Library
+                        currentUser={currentUser}
+                        />} path="/library" exact={true} />
                         <Route element={<Profile
-                        changeUser={currentUser}
+                        changeUser={changeUser}
                         />} path="/profile" />                        
                     </Routes>
                 </div>

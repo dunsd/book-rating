@@ -6,6 +6,7 @@ const BookDisplay = ({
   storedBooks,
   setStoredBooks,
   editBook,
+  currentUser,
 }) => {
   async function deleteRecord(id) {
     try {
@@ -44,6 +45,7 @@ const BookDisplay = ({
 
   return (
     <div>
+      Current: {currentUser}
       {storedBooks.length > 0 && (
         <div>
           {storedBooks.map((input) => {

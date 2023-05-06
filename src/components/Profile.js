@@ -22,7 +22,7 @@ const Profile = ({changeUser}) => {
             />
         </Form.Group>
         <Button variant="secondary"
-        onClick={changeUser}>Change User</Button>
+        onClick={() => changeUser(userName)}>Change User</Button>
       </Form>
     </div>
   );
