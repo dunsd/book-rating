@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, Button, Modal } from "react-bootstrap";
-import { v4 as uuidv4 } from "uuid";
 
 const AddBook = ({
   bookDetails,
@@ -8,8 +7,6 @@ const AddBook = ({
   handleSubmit,
   formIsVisible,
   closeForm,
-  storedBooks,
-  setStoredBooks,
   setBookDetails,
   currentUser
 }) => {
