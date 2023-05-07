@@ -25,6 +25,7 @@ const BookDisplay = ({
 
   useEffect(() => {
     async function getRecords() {
+      
       const response = await fetch(`http://localhost:5000/record/${currentUser}/`);
 
       if (!response.ok) {
@@ -36,17 +37,17 @@ const BookDisplay = ({
       const storedBooks = await response.json();
       setStoredBooks(storedBooks);
     }
-
+    if(currentUser){ 
     getRecords();
-
+  }
     return;
     // eslint-disable-next-line
   }, [storedBooks.length, upFormIsVisible]);
 
   return (
     <div>
-      Current: {currentUser}
-      {storedBooks.length > 0 && (
+      Current User: {currentUser}
+      {storedBooks.length > 0 ? (
         <div>
           {storedBooks.map((input) => {
             return (
@@ -77,7 +78,17 @@ const BookDisplay = ({
             );
           })}
         </div>
-      )}
+      ): 
+      <Card>
+        <Card.Body>
+          No books are currently recorded under this user.
+          <br></br>
+          Press the "Add Book" button above to add your first book!
+        </Card.Body>
+      </Card>
+      
+      
+      }
     </div>
   );
 };
