@@ -94,6 +94,7 @@ const Library = ({currentUser}) => {
         storedBooks={storedBooks}
         setBookDetails={setBookDetails}
         setStoredBooks={setStoredBooks}
+        currentUser={currentUser}
       />
       <UpdateBook 
       bookToUpdate={bookToUpdate}

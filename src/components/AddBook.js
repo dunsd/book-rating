@@ -10,7 +10,8 @@ const AddBook = ({
   closeForm,
   storedBooks,
   setStoredBooks,
-  setBookDetails
+  setBookDetails,
+  currentUser
 }) => {
   async function addBookDb(book) {
     await fetch("http://localhost:5000/record/add", {
@@ -29,7 +30,7 @@ const AddBook = ({
   const formSubmit = (event) => {
     event.preventDefault();
     const newBook = {
-      id: uuidv4(),
+      user: currentUser,
       title,
       author,
       pages,
