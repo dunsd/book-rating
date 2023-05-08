@@ -70,6 +70,7 @@ db_connect.collection(user).insertOne(myobj)
 recordRoutes.route("/update/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: new ObjectId(req.params.id) };
+ let user = req.params.user;
  let newvalues = {
    $set: {
      title: req.body.title,
@@ -79,7 +80,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
    },
  };
  db_connect
-   .collection("records")
+   .collection(user)
    .updateOne(myquery, newvalues)
    .then(result => {
     response.status(200).json({
@@ -94,14 +95,14 @@ recordRoutes.route("/update/:id").post(function (req, response) {
       error: err
     })
    })
-   
      });
  
 // This section will help you delete a record
-recordRoutes.route("/:id").delete((req, response) => {
+recordRoutes.route("/:id/:user").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: new ObjectId(req.params.id) };
-  db_connect.collection("records").deleteOne(myquery)
+  let user = req.params.user;
+  db_connect.collection(user).deleteOne(myquery)
   .then(result => {
     response.status(200).json({
       message: "deleted",

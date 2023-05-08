@@ -10,7 +10,7 @@ const BookDisplay = ({
 }) => {
   async function deleteRecord(id) {
     try {
-      await fetch(`http://localhost:5000/${id}/`, {
+      await fetch(`http://localhost:5000/${id}/${currentUser}/`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
@@ -25,8 +25,9 @@ const BookDisplay = ({
 
   useEffect(() => {
     async function getRecords() {
-      
-      const response = await fetch(`http://localhost:5000/record/${currentUser}/`);
+      const response = await fetch(
+        `http://localhost:5000/record/${currentUser}/`
+      );
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -37,9 +38,9 @@ const BookDisplay = ({
       const storedBooks = await response.json();
       setStoredBooks(storedBooks);
     }
-    if(currentUser){ 
-    getRecords();
-  }
+    if (currentUser) {
+      getRecords();
+    }
     return;
     // eslint-disable-next-line
   }, [storedBooks.length, upFormIsVisible]);
@@ -78,17 +79,15 @@ const BookDisplay = ({
             );
           })}
         </div>
-      ): 
-      <Card>
-        <Card.Body>
-          No books are currently recorded under this user.
-          <br></br>
-          Press the "Add Book" button above to add your first book!
-        </Card.Body>
-      </Card>
-      
-      
-      }
+      ) : (
+        <Card>
+          <Card.Body>
+            No books are currently recorded under this user.
+            <br></br>
+            Press the "Add Book" button above to add your first book!
+          </Card.Body>
+        </Card>
+      )}
     </div>
   );
 };

@@ -1,15 +1,12 @@
 import React from "react";
 import { Form, Button, Modal } from "react-bootstrap";
-import { v4 as uuidv4 } from "uuid";
 
 const UpdateBook = ({
   handleChangeUpdate,
   bookToUpdate,
-  storedBooks,
-  setStoredBooks,
   upFormIsVisible,
   togUpForm,
-  getRecords,
+  currentUser,
 }) => {
   async function updateBookDb(id, book) {
     await fetch(`http://localhost:5000/update/${id}`, {
@@ -27,6 +24,7 @@ const UpdateBook = ({
   const handleUpdateSubmit = (event) => {
     event.preventDefault();
     const updatedBook = {
+      user: currentUser,
       title,
       author,
       pages,

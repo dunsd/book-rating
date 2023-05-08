@@ -103,6 +103,7 @@ const Library = ({currentUser}) => {
       handleChangeUpdate={handleChangeUpdate}
       setStoredBooks={setStoredBooks}
       storedBooks={storedBooks}
+      currentUser={currentUser}
       />
       <BookDisplay storedBooks={storedBooks}
       setStoredBooks={setStoredBooks}
