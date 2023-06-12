@@ -23,6 +23,7 @@ const BookDisplay = ({
     setStoredBooks(newRecords);
   }
 
+  //refresh list if no. of books change or if edit form is closed
   useEffect(() => {
     async function getRecords() {
       const response = await fetch(

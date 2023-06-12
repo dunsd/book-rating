@@ -1,122 +1,118 @@
 const express = require("express");
- 
-// recordRoutes is an instance of the express router.
-// We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /record.
+
+// Middleware router
 const recordRoutes = express.Router();
- 
-// This will help us connect to the database
+
+// database connection
 const dbo = require("../db/conn");
- 
-// This help convert the id from string to ObjectId for the _id.
+
+// Used to convert id from params to mongo id
 const ObjectId = require("mongodb").ObjectId;
- 
- 
-// This section will help you get a list of all the records.
+
+// Returns all records
 recordRoutes.route("/record/:user").get(async function (req, response) {
-    let db_connect = dbo.getDb();
-    let user = req.params.user;
-    console.log(user);
-    db_connect
-      .collection(user)
-      .find({})
-      .toArray()
-      .then((data) => {
-        console.log(data);
-        response.json(data);
-      });
-  
-  });
-// This section will help you get a single record by id
-recordRoutes.route("/record/:id").get(function (req, res) {
- let db_connect = dbo.getDb();
- let myquery = { _id: ObjectId(req.params.id) };
- db_connect
-   .collection("records")
-   .findOne(myquery, function (err, result) {
-     if (err) throw err;
-     res.json(result);
-   });
-});
- 
-// This section will help you create a new record.
-recordRoutes.route("/record/add").post(function (req, response) {
- let db_connect = dbo.getDb();
- let user = req.body.user;
- let myobj = {
-   title: req.body.title,
-   author: req.body.author,
-   pages: req.body.pages,
-   review: req.body.review,
- };
-db_connect.collection(user).insertOne(myobj)
-.then(result => {
-  response.status(200).json({
-    message: "added",
-    result
-  })
-})
-.catch(err => {
-  console.log(err);
-  response.status(500).json({
-    message: "Error when adding",
-    error: err
-  })
-})
-});
-
-
-// This section will help you update a record by id.
-recordRoutes.route("/update/:id").post(function (req, response) {
- let db_connect = dbo.getDb();
- let myquery = { _id: new ObjectId(req.params.id) };
- let user = req.params.user;
- let newvalues = {
-   $set: {
-     title: req.body.title,
-     author: req.body.author,
-     pages: req.body.pages,
-     review: req.body.review,
-   },
- };
- db_connect
-   .collection(user)
-   .updateOne(myquery, newvalues)
-   .then(result => {
-    response.status(200).json({
-      message: "Edited",
-      result
+  let db_connect = dbo.getDb();
+  let user = req.params.user;
+  console.log(user);
+  db_connect
+    .collection(user)
+    .find({})
+    .toArray()
+    .then((data) => {
+      console.log(data);
+      response.json(data);
     });
-   })
-   .catch(err => {
-    console.log(err);
-    response.status(500).json({
-      message: "Error occured",
-      error: err
+});
+// Return a record via its id
+recordRoutes.route("/record/:id").get(function (req, res) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: ObjectId(req.params.id) };
+  db_connect.collection("records").findOne(myquery, function (err, result) {
+    if (err) throw err;
+    res.json(result);
+  });
+});
+
+// Create a new record
+recordRoutes.route("/record/add").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let user = req.body.user;
+  let myobj = {
+    title: req.body.title,
+    author: req.body.author,
+    pages: req.body.pages,
+    review: req.body.review,
+  };
+  db_connect
+    .collection(user)
+    .insertOne(myobj)
+    .then((result) => {
+      response.status(200).json({
+        message: "added",
+        result,
+      });
     })
-   })
-     });
- 
-// This section will help you delete a record
+    .catch((err) => {
+      console.log(err);
+      response.status(500).json({
+        message: "Error when adding",
+        error: err,
+      });
+    });
+});
+
+// Update a record via ID
+recordRoutes.route("/update/:id").post(function (req, response) {
+  let db_connect = dbo.getDb();
+  let myquery = { _id: new ObjectId(req.params.id) };
+  let user = req.params.user;
+  let newvalues = {
+    $set: {
+      title: req.body.title,
+      author: req.body.author,
+      pages: req.body.pages,
+      review: req.body.review,
+    },
+  };
+  db_connect
+    .collection(user)
+    .updateOne(myquery, newvalues)
+    .then((result) => {
+      response.status(200).json({
+        message: "Edited",
+        result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      response.status(500).json({
+        message: "Error occured",
+        error: err,
+      });
+    });
+});
+
+// Delete a record via ID
 recordRoutes.route("/:id/:user").delete((req, response) => {
   let db_connect = dbo.getDb();
   let myquery = { _id: new ObjectId(req.params.id) };
   let user = req.params.user;
-  db_connect.collection(user).deleteOne(myquery)
-  .then(result => {
-    response.status(200).json({
-      message: "deleted",
-      result
+  db_connect
+    .collection(user)
+    .deleteOne(myquery)
+    .then((result) => {
+      response.status(200).json({
+        message: "deleted",
+        result,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+      response.status(500).json({
+        message: "Error Occured",
+        error: err,
+      });
     });
-  })  
-  .catch(err => {
-    console.log(err);
-    response.status(500).json({
-      message: 'Error Occured',
-      error: err
-  })
- });
-})
+});
 
- 
 module.exports = recordRoutes;

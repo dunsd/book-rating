@@ -13,6 +13,12 @@ header {
     height: 3em;
     width: auto;
   }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+  }
 }
 
 footer {
