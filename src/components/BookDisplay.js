@@ -44,7 +44,7 @@ const BookDisplay = ({
     }
     return;
     // eslint-disable-next-line
-  }, [storedBooks.length, upFormIsVisible]);
+  }, [storedBooks.length, storedBooks]);
 
   return (
     <div>

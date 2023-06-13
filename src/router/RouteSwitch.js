@@ -9,6 +9,8 @@ import { useState } from "react";
 import "../App.scss";
 
 const RouteSwitch = () => {
+
+  //Current user is used for db collections
   const [currentUser, setCurrentUser] = useState("");
 
   const changeUser = (userName) => {

@@ -62,7 +62,7 @@ recordRoutes.route("/record/add").post(function (req, response) {
 });
 
 // Update a record via ID
-recordRoutes.route("/update/:id").post(function (req, response) {
+recordRoutes.route("/update/:id/:user").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myquery = { _id: new ObjectId(req.params.id) };
   let user = req.params.user;

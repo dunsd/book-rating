@@ -7,6 +7,8 @@ import { Button } from "react-bootstrap";
 import "../css/Library.scss";
 
 const Library = ({currentUser}) => {
+
+  //initialise book states
   const [bookDetails, setBookDetails] = useState({
     title: "",
     author: "",
@@ -23,9 +25,7 @@ const Library = ({currentUser}) => {
 
 
 
-  const [storedBooks, setStoredBooks] = useState([
-    
-  ]);
+  const [storedBooks, setStoredBooks] = useState([]);
 
   const [formIsVisible, setFormIsVisible] = useState(false);
 
@@ -58,27 +58,17 @@ const Library = ({currentUser}) => {
 
   const [upFormIsVisible, setUpFormIsVisible] = useState(false);
 
+  //toggle update form
   const togUpForm = () => {
     setUpFormIsVisible(prevState => !prevState);
+    console.log(upFormIsVisible)
   }
 
+  //submit new book and update stored books
   const handleSubmit = (book) => {
     setStoredBooks({book, ...storedBooks});
     console.log(book);
   };
-
-  async function getRecords() {
-    const response = await fetch(`http://localhost:5000/record/`);
-
-    if (!response.ok) {
-      const message = `An error occurred: ${response.statusText}`;
-      window.alert(message);
-      return;
-    }
-
-    const storedBooks = await response.json();
-    setStoredBooks(storedBooks);
-  }
 
   return (
     <div className="library">
@@ -109,7 +99,7 @@ const Library = ({currentUser}) => {
       setStoredBooks={setStoredBooks}
       formIsVisible={formIsVisible}
       editBook={editBook}
-      getRecords={getRecords}
+      // getRecords={getRecords}
       upFormIsVisible={upFormIsVisible}
       currentUser={currentUser}
       />

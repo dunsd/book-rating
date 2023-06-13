@@ -9,7 +9,7 @@ const UpdateBook = ({
   currentUser,
 }) => {
   async function updateBookDb(id, book) {
-    await fetch(`http://localhost:5000/update/${id}`, {
+    await fetch(`http://localhost:5000/update/${id}/${currentUser}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,7 +20,9 @@ const UpdateBook = ({
       return;
     });
   }
-  const { title, author, pages } = bookToUpdate;
+
+  //submit handler
+  const { title, author, pages, review } = bookToUpdate;
   const handleUpdateSubmit = (event) => {
     event.preventDefault();
     const updatedBook = {
@@ -28,6 +30,7 @@ const UpdateBook = ({
       title,
       author,
       pages,
+      review
     };
     updateBookDb(bookToUpdate._id, updatedBook);
     togUpForm();
@@ -70,6 +73,18 @@ const UpdateBook = ({
               className="inputControl"
               name="pages"
               value={pages}
+              onChange={(event) => handleChangeUpdate(event)}
+            />
+          </Form.Group>
+          <Form.Group className="formInput m-1" controlId="pages">
+            <Form.Label>Review: </Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Review"
+              className="inputControl"
+              name="review"
+              value={review}
               onChange={(event) => handleChangeUpdate(event)}
             />
           </Form.Group>
