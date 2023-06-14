@@ -99,7 +99,6 @@ const Library = ({currentUser}) => {
       setStoredBooks={setStoredBooks}
       formIsVisible={formIsVisible}
       editBook={editBook}
-      // getRecords={getRecords}
       upFormIsVisible={upFormIsVisible}
       currentUser={currentUser}
       />

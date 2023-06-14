@@ -13,7 +13,7 @@ const ObjectId = require("mongodb").ObjectId;
 recordRoutes.route("/record/:user").get(async function (req, response) {
   let db_connect = dbo.getDb();
   let user = req.params.user;
-  console.log(user);
+  //console.log(user);
   db_connect
     .collection(user)
     .find({})

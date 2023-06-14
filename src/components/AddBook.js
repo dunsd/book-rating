@@ -10,6 +10,8 @@ const AddBook = ({
   setBookDetails,
   currentUser
 }) => {
+
+  //Send book to firestore handler
   async function addBookDb(book) {
     await fetch("http://localhost:5000/record/add", {
       method: "POST",
@@ -21,7 +23,7 @@ const AddBook = ({
       window.alert(error);
       return;
     });
-  }
+  };
 
   const { title, author, pages, review } = bookDetails;
   const formSubmit = (event) => {
@@ -33,7 +35,7 @@ const AddBook = ({
       pages,
       review
     };
-    console.log(newBook);
+    //console.log(newBook);
     handleSubmit(newBook);
     addBookDb(newBook);
     closeForm();
