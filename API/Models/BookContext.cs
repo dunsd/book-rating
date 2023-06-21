@@ -4,10 +4,9 @@ namespace API.Models;
 
     public class BookContext : DbContext
     {
-        public BookContext(DbContextOptions<BookContext> options)
+        public BookContext(DbContextOptions options)
             : base(options)
             {
-                
             }
             public DbSet<Book> Books { get; set; } = null!;
     }

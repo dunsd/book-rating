@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using API.Models;
+using API;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<BookContext>(opt=> 
-    opt.UseInMemoryDatabase("Books"));
+    opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -25,5 +26,18 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+
+try {
+    var context = services.GetRequiredService<BookContext>();
+    context.Database.Migrate();
+    await Seed.SeedData(context);
+}
+catch (Exception err) {
+    var logger = services.GetRequiredService<ILogger>();
+    logger.LogError(err, "Error during migration.");
+}
 
 app.Run();

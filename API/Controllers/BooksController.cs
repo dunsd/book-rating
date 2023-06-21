@@ -9,7 +9,7 @@ using API.Models;
 
 namespace API.Controllers
 {
-    [Route("api/[Books]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
     {
@@ -52,7 +52,7 @@ namespace API.Controllers
         // PUT: api/Books/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBook(long id, Book book)
+        public async Task<IActionResult> PutBook(Guid id, Book book)
         {
             if (id != book.Id)
             {
@@ -116,7 +116,7 @@ namespace API.Controllers
             return NoContent();
         }
 
-        private bool BookExists(long id)
+        private bool BookExists(Guid id)
         {
             return (_context.Books?.Any(e => e.Id == id)).GetValueOrDefault();
         }
