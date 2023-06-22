@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace API.Models
 {
-    public class Book
+    public class BookDTO
     {
         public Guid Id { get; set; }
         public string? Title { get; set; }
@@ -13,5 +13,6 @@ namespace API.Models
         public int Pages { get; set; }
         public string? Review { get; set; }
         public string? User { get; set; }
+        public DateTime CreatedDate { get; set;}
     }
 }

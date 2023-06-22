@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Models;
@@ -14,9 +9,11 @@ namespace API.Controllers
     public class BooksController : ControllerBase
     {
         private readonly BookContext _context;
+        private readonly ILogger<BooksController> _logger;
 
-        public BooksController(BookContext context)
+        public BooksController(BookContext context, ILogger<BooksController> logger)
         {
+            _logger = logger;  
             _context = context;
         }
 
@@ -28,15 +25,17 @@ namespace API.Controllers
           {
               return NotFound();
           }
+            _logger.LogInformation("Retrieving all books");
             return await _context.Books.ToListAsync();
         }
 
         // GET: api/Books/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetBook(long id)
+        public async Task<ActionResult<Book>> GetBook(Guid id)
         {
           if (_context.Books == null)
           {
+            _logger.LogError("Book with id " + id + " not found");
               return NotFound();
           }
             var book = await _context.Books.FindAsync(id);
