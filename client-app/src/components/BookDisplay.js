@@ -30,14 +30,8 @@ const BookDisplay = ({
         `http://localhost:5000/api/books`, {
           method: "GET",
           headers: { "Content-Type": "application/json" },
-          // credentials: "include",
-
         }
       );
-
-
-
-      
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -62,7 +56,7 @@ const BookDisplay = ({
         <div>
           {storedBooks.map((input) => {
             return (
-              <Card key={input._id}>
+              <Card key={input.id}>
                 <Card.Body>
                   <div>Title: {input.title}</div>
                   <div>Author: {input.author}</div>
