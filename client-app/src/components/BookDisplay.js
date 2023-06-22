@@ -10,7 +10,7 @@ const BookDisplay = ({
 }) => {
   async function deleteRecord(id) {
     try {
-      await fetch(`http://localhost:5000/${id}/${currentUser}/`, {
+      await fetch(`http://localhost:5000/api/books/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
@@ -18,7 +18,7 @@ const BookDisplay = ({
       console.error("Error with delete", error);
     }
 
-    const newRecords = storedBooks.filter((el) => el._id !== id);
+    const newRecords = storedBooks.filter((el) => el.id !== id);
 
     setStoredBooks(newRecords);
   }
@@ -67,7 +67,7 @@ const BookDisplay = ({
                   <Button
                     className="deleteBtn"
                     variant="secondary"
-                    onClick={() => deleteRecord(input._id)}
+                    onClick={() => deleteRecord(input.id)}
                   >
                     Delete
                   </Button>

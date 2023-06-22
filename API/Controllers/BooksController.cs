@@ -97,7 +97,7 @@ namespace API.Controllers
 
         // DELETE: api/Books/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBook(long id)
+        public async Task<IActionResult> DeleteBook(Guid id)
         {
             if (_context.Books == null)
             {
