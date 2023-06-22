@@ -27,8 +27,17 @@ const BookDisplay = ({
   useEffect(() => {
     async function getRecords() {
       const response = await fetch(
-        `http://localhost:5000/record/${currentUser}/`
+        `http://localhost:5000/api/books`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+          // credentials: "include",
+
+        }
       );
+
+
+
+      
 
       if (!response.ok) {
         const message = `An error occurred: ${response.statusText}`;
@@ -39,12 +48,12 @@ const BookDisplay = ({
       const storedBooks = await response.json();
       setStoredBooks(storedBooks);
     }
-    if (currentUser) {
+    //if (currentUser) {
       getRecords();
-    }
+    //}
     return;
     // eslint-disable-next-line
-  }, [storedBooks.length, storedBooks]);
+  }, [/*storedBooks.length, storedBooks*/]);
 
   return (
     <div>

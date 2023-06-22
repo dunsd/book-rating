@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Button, Modal } from "react-bootstrap";
+import { v4 as uuid } from 'uuid';
 
 const AddBook = ({
   bookDetails,
@@ -29,6 +30,7 @@ const AddBook = ({
   const formSubmit = (event) => {
     event.preventDefault();
     const newBook = {
+      id: uuid(),
       user: currentUser,
       title,
       author,
