@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Models;
+using API.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,7 +10,9 @@ namespace API.Controllers
     public class UserController : ControllerBase
     {
         private readonly UserManager<LocalUser> _userManager;
-        public UserController (UserManager<LocalUser> userManager) {
+        private readonly TokenService _tokenService;
+        public UserController (UserManager<LocalUser> userManager, TokenService tokenService) {
+            _tokenService = tokenService;
             _userManager = userManager;
         }
 
@@ -31,7 +30,7 @@ namespace API.Controllers
                 return new UserDTO {
                     DisplayName = user.DisplayName,
                     Image = null,
-                    Token = "token tbc",
+                    Token = _tokenService.CreateToken(user),
                     Username = user.UserName
                 };
             }

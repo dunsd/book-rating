@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Models;
+using API.Services;
 
 namespace API.Extensions
 {
@@ -15,6 +12,7 @@ namespace API.Extensions
             .AddEntityFrameworkStores<BookContext>();
 
             services.AddAuthentication();
+            services.AddScoped<TokenService>();
 
             return services;   
         }
