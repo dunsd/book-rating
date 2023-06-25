@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Migrations
 {
     [DbContext(typeof(BookContext))]
-    [Migration("20230625163434_IdentityAdded")]
-    partial class IdentityAdded
+    [Migration("20230625222607_IdentityAdded4")]
+    partial class IdentityAdded4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

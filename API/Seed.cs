@@ -1,9 +1,23 @@
 using API.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace API
 {
     public class Seed
     {
+
+        public static async Task SeedData(BookContext context, UserManager<LocalUser> userManager) {
+            if(!userManager.Users.Any()) {
+                var users = new List<LocalUser> {
+                    new LocalUser{DisplayName = "Bob", UserName = "bob", Email = "bob@test.com"},
+                    new LocalUser{DisplayName = "Ret", UserName = "jim", Email = "jim@test.com"},
+                };
+                foreach (var user in users) {
+                    await userManager.CreateAsync(user, "Password123");
+                }
+            }
+        }
+
         public static async Task SeedData(BookContext context) {
             if(context.Books.Any()) return;
 
