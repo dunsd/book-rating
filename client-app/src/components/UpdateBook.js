@@ -9,7 +9,7 @@ const UpdateBook = ({
   currentUser,
 }) => {
   async function updateBookDb(id, book) {
-    await fetch(`http://localhost:5000/update/${id}/${currentUser}`, {
+    await fetch(`http://localhost:5000/update/${id}/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,10 +22,11 @@ const UpdateBook = ({
   }
 
   //submit handler
-  const { title, author, pages, review } = bookToUpdate;
+  const { id, title, author, pages, review } = bookToUpdate;
   const handleUpdateSubmit = (event) => {
     event.preventDefault();
     const updatedBook = {
+      id: id,
       user: currentUser,
       title,
       author,
