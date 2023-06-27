@@ -18,6 +18,7 @@ const AddBook = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${currentUser.token}`
       },
       body: JSON.stringify(book),
     }).catch((error) => {
@@ -31,7 +32,7 @@ const AddBook = ({
     event.preventDefault();
     const newBook = {
       id: uuid(),
-      user: currentUser,
+      user: currentUser.username,
       title,
       author,
       pages,

@@ -12,7 +12,10 @@ const BookDisplay = ({
     try {
       await fetch(`http://localhost:5000/api/books/${id}`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${currentUser.token}`
+        },
       });
     } catch (error) {
       console.error("Error with delete", error);
@@ -26,10 +29,15 @@ const BookDisplay = ({
   //refresh list if no. of books change or if edit form is closed
   useEffect(() => {
     async function getRecords() {
+      const token = currentUser.token;
+      if(token) {
       const response = await fetch(
         `http://localhost:5000/api/books`, {
           method: "GET",
-          headers: { "Content-Type": "application/json" },
+          headers: { 
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${currentUser.token}`
+           },
         }
       );
 
@@ -42,16 +50,17 @@ const BookDisplay = ({
       const storedBooks = await response.json();
       setStoredBooks(storedBooks);
     }
+    }
     //if (currentUser) {
       getRecords();
     //}
     return;
     // eslint-disable-next-line
-  }, [/*storedBooks.length, storedBooks*/]);
+  }, [storedBooks.length]);
 
   return (
     <div>
-      Current User: {currentUser}
+      { currentUser && <div> Current User: {currentUser.username}
       {storedBooks.length > 0 ? (
         <div>
           {storedBooks.map((input) => {
@@ -92,7 +101,9 @@ const BookDisplay = ({
           </Card.Body>
         </Card>
       )}
+      </div>}
     </div>
+    
   );
 };
 export default BookDisplay;

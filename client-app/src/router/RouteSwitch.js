@@ -13,10 +13,13 @@ const RouteSwitch = () => {
   //Current user is used for db collections
   const [currentUser, setCurrentUser] = useState("");
 
-  const changeUser = (userName) => {
-    setCurrentUser(userName);
-    console.log(currentUser);
+  const changeUser = (userInfo) => {
+    setCurrentUser(userInfo);
   };
+
+  const signOut = () => {
+    setCurrentUser(null);
+  }
 
   return (
     <BrowserRouter>
@@ -31,7 +34,10 @@ const RouteSwitch = () => {
               exact={true}
             />
             <Route
-              element={<Profile changeUser={changeUser} />}
+              element={<Profile 
+                changeUser={changeUser}
+                signOut={signOut}
+                />}
               path="/profile"
             />
           </Routes>

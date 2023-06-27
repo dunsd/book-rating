@@ -13,6 +13,7 @@ const UpdateBook = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${currentUser.token}`
       },
       body: JSON.stringify(book),
     }).catch((error) => {
@@ -27,7 +28,7 @@ const UpdateBook = ({
     event.preventDefault();
     const updatedBook = {
       id: id,
-      user: currentUser,
+      user: currentUser.username,
       title,
       author,
       pages,

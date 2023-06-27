@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
-const SignInForm = () => {
+const SignInForm = ({changeUser}) => {
     const [userLogin, setUserLogIn] = useState({
-        username: "",
         email: "",
-        displayName: "",
         password: ""
       });
   
@@ -17,26 +15,26 @@ const SignInForm = () => {
           }));
       };
   
-      const {username, email, displayName, password } = userLogin
-      const registerUser = async (e) => {
-        console.log(userLogin.displayName)
+      const {email,  password } = userLogin
+      const loginUser = async (e) => {
         e.preventDefault();
-        const newUser = {
-          username,
+        const logUser = {
           email,
-          displayName,
           password
         }
-        console.log(newUser);
+        console.log(logUser);
   
         try {
-          fetch("http://localhost:5000/api/user/login", {
+          const response = await fetch("http://localhost:5000/api/user/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(newUser),
+            body: JSON.stringify(logUser),
           })
+          const userInfo = await response.json();
+          console.log(userInfo);
+          changeUser(userInfo);
         }
         catch (err) {
           console.log(err);
@@ -46,16 +44,6 @@ const SignInForm = () => {
     return (
         <div>
 <Form className="userForm">
-        <Form.Group className="formInput m-1" controlId="userName">
-            <Form.Label>Enter Username</Form.Label>
-            <Form.Control 
-            type="text"
-            className="inputControl"
-            name="username"
-            value={userLogin.username}
-            onChange={event => handleChange(event)}
-            />
-        </Form.Group>
         <Form.Group className="formInput m-1" controlId="email">
           <Form.Label>Enter Email</Form.Label>
           <Form.Control
@@ -63,16 +51,6 @@ const SignInForm = () => {
           className="inputControl"
           name="email"
           value={userLogin.email}
-          onChange={event => handleChange(event)}
-          />
-        </Form.Group>
-        <Form.Group className="formInput m-1" controlId="displayName">
-          <Form.Label>Enter Display Name</Form.Label>
-          <Form.Control
-          type="text"
-          className="inputControl"
-          name="displayName"
-          value={userLogin.displayName}
           onChange={event => handleChange(event)}
           />
         </Form.Group>
@@ -87,7 +65,7 @@ const SignInForm = () => {
           />
         </Form.Group>
         <Button variant="secondary"
-        onClick={(e) => registerUser(e)}>Sign In User</Button>
+        onClick={(e) => loginUser(e)}>Sign In User</Button>
       </Form>
         </div>
     )

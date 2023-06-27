@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import RegisterForm from "./RegisterForm";
 import SignInForm from "./SignInForm";
 
-const Profile = ({changeUser}) => {
+const Profile = ({ changeUser, signOut}) => {
 
   const [toggleSignIn, setToggleSignIn] = useState(false);
   const [toggleRegister, setToggleRegister] = useState(false);
@@ -25,8 +25,11 @@ const Profile = ({changeUser}) => {
       <Button onClick={toggleRegisterForm}>
         Register
       </Button>
-      { toggleRegister && <RegisterForm />}
-      {toggleSignIn && <SignInForm />}
+      <Button onClick={signOut}>
+        Sign Out
+      </Button>
+      { toggleRegister && <RegisterForm changeUser={changeUser} />}
+      {toggleSignIn && <SignInForm changeUser={changeUser} />}
     </div>
   );
 };
