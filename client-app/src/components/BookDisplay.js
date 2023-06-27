@@ -30,9 +30,10 @@ const BookDisplay = ({
   useEffect(() => {
     async function getRecords() {
       const token = currentUser.token;
+      const username = currentUser.username;
       if(token) {
       const response = await fetch(
-        `http://localhost:5000/api/books`, {
+        `http://localhost:5000/api/books/list/${username}`, {
           method: "GET",
           headers: { 
             "Content-Type": "application/json",

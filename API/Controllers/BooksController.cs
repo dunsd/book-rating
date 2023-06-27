@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API.Controllers
 {
-    
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
@@ -20,15 +20,18 @@ namespace API.Controllers
         }
 
         // GET: api/Books
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBooks()
+        [HttpGet("/list/{userID}")]
+        public async Task<ActionResult<IEnumerable<Book>>> GetBooks(string userID)
         {
           if (_context.Books == null)
           {
               return NotFound();
           }
             _logger.LogInformation("Retrieving all books");
-            return await _context.Books.ToListAsync();
+            
+            var bookList = await _context.Books.Where(x => x.UserID == userID).ToListAsync();
+            return bookList;
+            //return await _context.Books.ToListAsync();
         }
 
         // GET: api/Books/5

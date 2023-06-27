@@ -32,7 +32,7 @@ const AddBook = ({
     event.preventDefault();
     const newBook = {
       id: uuid(),
-      user: currentUser.username,
+      userId: currentUser.username,
       title,
       author,
       pages,

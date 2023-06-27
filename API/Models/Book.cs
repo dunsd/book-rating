@@ -12,5 +12,6 @@ namespace API.Models
         public string Author { get; set; }
         public int Pages { get; set; }
         public string Review { get; set; }
+        public string UserID { get; set; }
     }
 }
