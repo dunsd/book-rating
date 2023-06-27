@@ -87,7 +87,7 @@ const RegisterForm = () => {
           />
         </Form.Group>
         <Button variant="secondary"
-        onClick={(e) => registerUser(e)}>Change User</Button>
+        onClick={(e) => registerUser(e)}>Register New User</Button>
       </Form>
         </div>
     )
