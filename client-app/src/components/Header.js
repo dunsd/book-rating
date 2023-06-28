@@ -4,7 +4,7 @@ import { Nav, Navbar, Container } from "react-bootstrap";
 import '../css/HeaderFooter.scss';
 import logo from '../images/book-logo.jpg'
 
-const Header = () => {
+const Header = ({ currentUser }) => {
 
   return (
 
@@ -19,6 +19,9 @@ const Header = () => {
             <Nav.Link as={Link} to="/library">Library</Nav.Link>
             <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
           </Nav>
+          {currentUser && <div className="userDisplay">
+            Current User: {currentUser.username}
+            </div> }
         </Container>
       </Navbar>
     </header>

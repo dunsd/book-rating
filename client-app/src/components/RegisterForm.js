@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
-const RegisterForm = () => {
+const RegisterForm = ({ apiURL }) => {
     const [userRegister, setUserRegister] = useState({
         username: "",
         email: "",
@@ -30,7 +30,7 @@ const RegisterForm = () => {
         console.log(newUser);
   
         try {
-          fetch("http://localhost:5000/api/user/register", {
+          fetch(apiURL +"/user/register", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -7,9 +7,10 @@ const UpdateBook = ({
   upFormIsVisible,
   togUpForm,
   currentUser,
+  apiURL
 }) => {
   async function updateBookDb(id, book) {
-    await fetch(`http://localhost:5000/api/books/${id}/`, {
+    await fetch(apiURL + `/books/${id}/`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

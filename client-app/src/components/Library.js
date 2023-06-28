@@ -6,7 +6,7 @@ import UpdateBook from "./UpdateBook";
 import { Button } from "react-bootstrap";
 import "../css/Library.scss";
 
-const Library = ({currentUser}) => {
+const Library = ({currentUser, apiURL}) => {
 
   //initialise book states
   const [bookDetails, setBookDetails] = useState({
@@ -76,6 +76,7 @@ const Library = ({currentUser}) => {
         Add a Book
       </Button>
       <AddBook
+        apiURL={apiURL}
         bookDetails={bookDetails}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
@@ -87,6 +88,7 @@ const Library = ({currentUser}) => {
         currentUser={currentUser}
       />
       <UpdateBook 
+      apiURL={apiURL}
       bookToUpdate={bookToUpdate}
       upFormIsVisible={upFormIsVisible}
       togUpForm={togUpForm}
@@ -95,7 +97,9 @@ const Library = ({currentUser}) => {
       storedBooks={storedBooks}
       currentUser={currentUser}
       />
-      <BookDisplay storedBooks={storedBooks}
+      <BookDisplay 
+      apiURL={apiURL}
+      storedBooks={storedBooks}
       setStoredBooks={setStoredBooks}
       formIsVisible={formIsVisible}
       editBook={editBook}

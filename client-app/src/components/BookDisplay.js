@@ -7,10 +7,11 @@ const BookDisplay = ({
   setStoredBooks,
   editBook,
   currentUser,
+  apiURL
 }) => {
   async function deleteRecord(id) {
     try {
-      await fetch(`http://localhost:5000/api/books/${id}`, {
+      await fetch(apiURL + `/books/${id}`, {
         method: "DELETE",
         headers: { 
           "Content-Type": "application/json",
@@ -33,7 +34,7 @@ const BookDisplay = ({
       const username = currentUser.username;
       if(token) {
       const response = await fetch(
-        `http://localhost:5000/api/books/list/${username}`, {
+        apiURL + `/books/list/${username}`, {
           method: "GET",
           headers: { 
             "Content-Type": "application/json",

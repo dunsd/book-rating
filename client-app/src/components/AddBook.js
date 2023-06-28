@@ -9,12 +9,15 @@ const AddBook = ({
   formIsVisible,
   closeForm,
   setBookDetails,
-  currentUser
+  currentUser,
+  apiURL
 }) => {
+
+  
 
   //Send book to firestore handler
   async function addBookDb(book) {
-    await fetch("http://localhost:5000/api/books", {
+    await fetch(apiURL + "/books", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 
-const SignInForm = ({changeUser}) => {
+const SignInForm = ({changeUser, apiURL}) => {
     const [userLogin, setUserLogIn] = useState({
         email: "",
         password: ""
@@ -22,10 +22,9 @@ const SignInForm = ({changeUser}) => {
           email,
           password
         }
-        console.log(logUser);
   
         try {
-          const response = await fetch("http://localhost:5000/api/user/login", {
+          const response = await fetch(apiURL + "/user/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -21,15 +21,20 @@ const RouteSwitch = () => {
     setCurrentUser(null);
   }
 
+  const apiURL = process.env.REACT_APP_API_URL;
+
   return (
     <BrowserRouter>
       <div className="mainPage">
-        <Header />
+        <Header currentUser={currentUser} />
         <div className="main-content">
           <Routes>
             <Route element={<Home />} path="/" exact={true} />
             <Route
-              element={<Library currentUser={currentUser} />}
+              element={<Library 
+                currentUser={currentUser}
+                apiURL={apiURL}
+              />}
               path="/library"
               exact={true}
             />
@@ -37,6 +42,7 @@ const RouteSwitch = () => {
               element={<Profile 
                 changeUser={changeUser}
                 signOut={signOut}
+                apiURL={apiURL}
                 />}
               path="/profile"
             />
