@@ -7,7 +7,8 @@ const UpdateBook = ({
   upFormIsVisible,
   togUpForm,
   currentUser,
-  apiURL
+  apiURL,
+  forceUpdate
 }) => {
   async function updateBookDb(id, book) {
     await fetch(apiURL + `/books/${id}/`, {
@@ -21,6 +22,7 @@ const UpdateBook = ({
       window.alert(error);
       return;
     });
+    forceUpdate();
   }
 
   //submit handler
@@ -37,6 +39,7 @@ const UpdateBook = ({
     };
     updateBookDb(bookToUpdate.id, updatedBook);
     togUpForm();
+    
   };
 
   return (

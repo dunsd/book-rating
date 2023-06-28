@@ -27,7 +27,6 @@ const RegisterForm = ({ apiURL }) => {
           displayName,
           password
         }
-        console.log(newUser);
   
         try {
           fetch(apiURL +"/user/register", {

@@ -23,7 +23,7 @@ const Library = ({currentUser, apiURL}) => {
     review: "",
   })
 
-
+  const [update, setUpdate] = useState(false);
 
   const [storedBooks, setStoredBooks] = useState([]);
 
@@ -36,6 +36,12 @@ const Library = ({currentUser, apiURL}) => {
   const closeForm = (e) => {
     setFormIsVisible(false);
   };
+
+
+  //Force a rerender of book display when editing book (dependency is on stored books length)
+  const forceUpdate = () => {
+    setUpdate(prevState => !prevState);
+  }
 
   const handleChange = (event) => {
     setBookDetails((prevState) => ({
@@ -61,13 +67,11 @@ const Library = ({currentUser, apiURL}) => {
   //toggle update form
   const togUpForm = () => {
     setUpFormIsVisible(prevState => !prevState);
-    console.log(upFormIsVisible)
   }
 
   //submit new book and update stored books
   const handleSubmit = (book) => {
     setStoredBooks({book, ...storedBooks});
-    console.log(book);
   };
 
   return (
@@ -96,6 +100,7 @@ const Library = ({currentUser, apiURL}) => {
       setStoredBooks={setStoredBooks}
       storedBooks={storedBooks}
       currentUser={currentUser}
+      forceUpdate={forceUpdate}
       />
       <BookDisplay 
       apiURL={apiURL}
@@ -105,6 +110,7 @@ const Library = ({currentUser, apiURL}) => {
       editBook={editBook}
       upFormIsVisible={upFormIsVisible}
       currentUser={currentUser}
+      update={update}
       />
     </div>
   );

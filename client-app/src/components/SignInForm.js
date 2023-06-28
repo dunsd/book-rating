@@ -32,7 +32,6 @@ const SignInForm = ({changeUser, apiURL}) => {
             body: JSON.stringify(logUser),
           })
           const userInfo = await response.json();
-          console.log(userInfo);
           changeUser(userInfo);
         }
         catch (err) {

@@ -7,7 +7,8 @@ const BookDisplay = ({
   setStoredBooks,
   editBook,
   currentUser,
-  apiURL
+  apiURL,
+  update
 }) => {
   async function deleteRecord(id) {
     try {
@@ -58,7 +59,7 @@ const BookDisplay = ({
     //}
     return;
     // eslint-disable-next-line
-  }, [storedBooks.length, storedBooks]);
+  }, [storedBooks.length, update]);
 
   return (
     <div>
