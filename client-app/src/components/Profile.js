@@ -19,15 +19,17 @@ const Profile = ({ changeUser, signOut}) => {
    
   return (
     <div>
-      <Button onClick={toggleSignInForm}>
+      <div className="signBtnContainer">
+      <Button variant="secondary" onClick={toggleSignInForm}>
         Login
       </Button>
-      <Button onClick={toggleRegisterForm}>
+      <Button variant="secondary" onClick={toggleRegisterForm}>
         Register
       </Button>
-      <Button onClick={signOut}>
+      <Button variant="secondary" onClick={signOut}>
         Sign Out
       </Button>
+      </div>
       { toggleRegister && <RegisterForm changeUser={changeUser} />}
       {toggleSignIn && <SignInForm changeUser={changeUser} />}
     </div>

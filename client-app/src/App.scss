@@ -25,3 +25,9 @@ body {
 .btn {
   color: black;
 }
+
+.signBtnContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}

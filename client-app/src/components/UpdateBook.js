@@ -9,8 +9,8 @@ const UpdateBook = ({
   currentUser,
 }) => {
   async function updateBookDb(id, book) {
-    await fetch(`http://localhost:5000/update/${id}/`, {
-      method: "POST",
+    await fetch(`http://localhost:5000/api/books/${id}/`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${currentUser.token}`
@@ -28,13 +28,13 @@ const UpdateBook = ({
     event.preventDefault();
     const updatedBook = {
       id: id,
-      user: currentUser.username,
+      userId: currentUser.username,
       title,
       author,
       pages,
       review
     };
-    updateBookDb(bookToUpdate._id, updatedBook);
+    updateBookDb(bookToUpdate.id, updatedBook);
     togUpForm();
   };
 

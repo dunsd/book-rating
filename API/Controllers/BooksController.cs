@@ -20,7 +20,7 @@ namespace API.Controllers
         }
 
         // GET: api/Books
-        [HttpGet("/list/{userID}")]
+        [HttpGet("/api/books/list/{userID}")]
         public async Task<ActionResult<IEnumerable<Book>>> GetBooks(string userID)
         {
           if (_context.Books == null)

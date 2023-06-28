@@ -57,7 +57,7 @@ const BookDisplay = ({
     //}
     return;
     // eslint-disable-next-line
-  }, [storedBooks.length]);
+  }, [storedBooks.length, storedBooks]);
 
   return (
     <div>
