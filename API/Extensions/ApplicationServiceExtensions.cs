@@ -12,7 +12,7 @@ namespace API.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config) {
             services.AddDbContext<BookContext>(opt=> 
-            opt.UseSqlite(config.GetConnectionString("DefaultConnection")));
+            opt.UseNpgsql(config.GetConnectionString("DefaultConnection")));
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
