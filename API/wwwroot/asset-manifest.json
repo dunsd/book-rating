@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.9599d4c5.css",
-    "main.js": "/static/js/main.beda85bb.js",
+    "main.js": "/static/js/main.e55e4ad7.js",
     "static/media/book-logo.jpg": "/static/media/book-logo.4be7d492d2c67491d43e.jpg",
     "index.html": "/index.html",
     "main.9599d4c5.css.map": "/static/css/main.9599d4c5.css.map",
-    "main.beda85bb.js.map": "/static/js/main.beda85bb.js.map"
+    "main.e55e4ad7.js.map": "/static/js/main.e55e4ad7.js.map"
   },
   "entrypoints": [
     "static/css/main.9599d4c5.css",
-    "static/js/main.beda85bb.js"
+    "static/js/main.e55e4ad7.js"
   ]
 }

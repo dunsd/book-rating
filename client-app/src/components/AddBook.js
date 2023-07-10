@@ -10,7 +10,8 @@ const AddBook = ({
   closeForm,
   setBookDetails,
   currentUser,
-  apiURL
+  apiURL,
+  forceUpdate
 }) => {
 
   
@@ -28,6 +29,7 @@ const AddBook = ({
       window.alert(error);
       return;
     });
+    forceUpdate();
   };
 
   const { title, author, pages, review } = bookDetails;

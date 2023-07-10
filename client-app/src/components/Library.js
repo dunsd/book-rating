@@ -90,6 +90,7 @@ const Library = ({currentUser, apiURL}) => {
         setBookDetails={setBookDetails}
         setStoredBooks={setStoredBooks}
         currentUser={currentUser}
+        forceUpdate={forceUpdate}
       />
       <UpdateBook 
       apiURL={apiURL}
